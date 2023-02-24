@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Common
 {
-    public class ArchivableEntity : BaseEntity
+    public abstract class ArchivableEntity : BaseEntity
     {
         public bool IsArchived { get; private set; }
 

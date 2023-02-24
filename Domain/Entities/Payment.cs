@@ -10,10 +10,33 @@ namespace Domain.Entities
 {
     public class Payment : ArchivableEntity
     {
-        public Reservation Reservation { get; set; }
         public decimal Amount { get; set; }
         public PaymentMethodes Method { get; set; }
         public PaymentStatutes Status { get; set; }
+        public Reservation Reservation { get; set; }
+        public Guid ReservationId { get; set; }
         public User Buyer { get; set; }
+        public Guid BuyerId { get; set; }
+
+        public Payment(decimal amount, PaymentMethodes methode, PaymentStatutes statute, Guid reservationId, Guid buyerId)
+        {
+            Id = Guid.NewGuid();
+            Amount = amount;
+            Method = methode;
+            Status = statute;
+        }
+
+        public void CheckDeadline(Reservation reservation)
+        {
+            if(reservation.PaymentDeadline < DateTime.Now)
+            {
+                ChangeStatus(PaymentStatutes.Failed);
+            }
+        }
+
+        public void ChangeStatus(PaymentStatutes status)
+        {
+            Status = status;
+        }
     }
 }

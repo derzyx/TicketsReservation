@@ -11,6 +11,13 @@ namespace Domain.Entities
     {
         public string Username { get; set; }
         public string Password { get; set; }
-        public IEnumerator<Reservation> Reservations { get; set; }
+        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+
+        public User(string username, string password)
+        {
+            Id = Guid.NewGuid();
+            Username = username;
+            Password = password;
+        }
     }
 }
