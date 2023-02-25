@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.IRepositories;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,18 @@ namespace Application.Commands.AddUser
 {
     public class AddUserCommandHandler : IRequestHandler<AddUserCommand, User>
     {
-        public Task<User> Handle(AddUserCommand request, CancellationToken cancellationToken)
+        private readonly IUserRepository userRepository;
+
+        public AddUserCommandHandler(IUserRepository _userRepository)
         {
-            throw new NotImplementedException();
+            userRepository = _userRepository;
+        }
+
+        public async Task<User> Handle(AddUserCommand request, CancellationToken cancellationToken)
+        {
+            var user = await userRepository.AddAsync(new User(request.Nickname, request.Password));
+
+            return await Task.FromResult(user);
         }
     }
 }
