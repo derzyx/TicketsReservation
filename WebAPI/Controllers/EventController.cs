@@ -1,5 +1,4 @@
-﻿using Application.Commands.Users.AddUser;
-using Domain.Entities;
+﻿using Application.Commands.Events.AddEvent;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,19 +7,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class EventController : ControllerBase
     {
         private readonly IMediator mediator;
 
-        public UserController(IMediator _mediator)
+        public EventController(IMediator _mediator)
         {
             mediator = _mediator;
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add([FromQuery] AddUserCommand user)
+        public async Task<ActionResult> Add([FromQuery] AddEventCommand ev)
         {
-            var response = await mediator.Send(user);
+            var response = await mediator.Send(ev);
             return Ok(response);
         }
     }

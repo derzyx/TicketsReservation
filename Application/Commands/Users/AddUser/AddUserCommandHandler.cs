@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Commands.AddUser
+namespace Application.Commands.Users.AddUser
 {
     public class AddUserCommandHandler : IRequestHandler<AddUserCommand, User>
     {

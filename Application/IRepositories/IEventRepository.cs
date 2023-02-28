@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.IRepositories
 {
-    public interface IUserRepository : IGenericRepository<User>
+    public interface IEventRepository : IGenericRepository<Event>
     {
-        
+        Task<ICollection<Event>> GetAll();
     }
 }

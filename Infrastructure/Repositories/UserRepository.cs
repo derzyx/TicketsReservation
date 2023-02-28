@@ -1,6 +1,7 @@
 ﻿using Application.IRepositories;
 using Domain.Entities;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace Infrastructure.Repositories
             await context.SaveChangesAsync();
 
             return user;
+        }
+
+        public async Task<User?> GetByIdAsync(Guid id)
+        {
+            return await context.Users.FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task SaveChangesAsync()

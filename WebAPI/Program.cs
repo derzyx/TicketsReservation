@@ -22,6 +22,9 @@ builder.Services.AddMediatR(cfg =>
 builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 
 var app = builder.Build();
 

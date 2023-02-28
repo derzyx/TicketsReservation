@@ -24,6 +24,7 @@ namespace Domain.Entities
             Id = Guid.NewGuid();
             Name = name;
             Description = description;
+            ValidateDate(startDate, endDate);
             StartDate = startDate;
             EndDate = endDate;
             Location = location;
