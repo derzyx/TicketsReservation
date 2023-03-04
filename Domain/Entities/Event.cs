@@ -28,7 +28,23 @@ namespace Domain.Entities
             StartDate = startDate;
             EndDate = endDate;
             Location = location;
+            LocationId = location.Id;
             AllTickets = allTickets;
+        }
+
+        public void Update(string? name, string? description, DateTime? startDate, DateTime? endDate, Location? location, int? allTickets)
+        {
+            Name = (name == null) ? this.Name : name;
+            Description = (description == null) ? this.Description : description;
+            
+            var start = (startDate == null) ? this.StartDate : (DateTime)startDate;
+            var end = (endDate == null) ? this.EndDate : (DateTime)endDate;
+            ValidateDate(start, end);
+            StartDate = start;
+            EndDate = end;
+            Location = (location == null) ? this.Location : location;
+            LocationId = (location == null) ? this.Location.Id : location.Id;
+            AllTickets = (allTickets == null) ? this.AllTickets : (int)allTickets;
         }
 
         public void AddTicket(Ticket ticket)

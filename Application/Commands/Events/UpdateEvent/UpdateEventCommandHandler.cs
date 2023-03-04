@@ -1,4 +1,5 @@
-﻿using Application.IRepositories;
+﻿using Application.Exceptions;
+using Application.IRepositories;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -20,9 +21,14 @@ namespace Application.Commands.Events.UpdateEvent
 
         public async Task<Event> Handle(UpdateEventCommand request, CancellationToken cancellationToken)
         {
-            var ev = await eventRepository.GetByIdAsync(request.ev.Id);
+            var ev = await eventRepository.GetByIdAsync(request.Id);
 
-            ev = request.ev;
+            if(ev == null)
+            {
+                throw new EventNotFoundException();
+            }
+
+            ev.Update(request.Name, request.Description, request.StartDate, request.EndDate, request.Location, request.AllTickets);
 
             return ev;
         }

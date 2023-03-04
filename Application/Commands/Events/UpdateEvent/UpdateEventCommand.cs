@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace Application.Commands.Events.UpdateEvent
 {
-    public record UpdateEventCommand(Event ev) : IRequest<Event>;
+    public record UpdateEventCommand(Guid Id, string Name, string Description, DateTime StartDate, DateTime EndDate, Location Location, int AllTickets) : IRequest<Event>;
 }

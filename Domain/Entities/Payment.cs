@@ -18,12 +18,13 @@ namespace Domain.Entities
         public User Buyer { get; set; }
         public Guid BuyerId { get; set; }
 
-        public Payment(decimal amount, PaymentMethodes methode, PaymentStatutes statute, Guid reservationId, Guid buyerId)
+        public Payment(decimal amount, PaymentMethodes methode, Guid reservationId, Guid buyerId)
         {
             Id = Guid.NewGuid();
             Amount = amount;
             Method = methode;
-            Status = statute;
+            ReservationId = reservationId;
+            BuyerId = buyerId;
         }
 
         public void CheckDeadline(Reservation reservation)
