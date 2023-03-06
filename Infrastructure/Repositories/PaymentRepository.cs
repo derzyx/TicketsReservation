@@ -1,6 +1,5 @@
 ﻿using Application.IRepositories;
 using Domain.Entities;
-using Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +8,14 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public class LocationRepository : ILocationRepository
+    public class PaymentRepository : IPaymentRepository
     {
-        private readonly Context context;
-
-        public LocationRepository(Context _context)
-        {
-            context = _context;
-        }
-
-        public Task<Location> AddAsync(Location entity)
+        public Task<Payment> AddAsync(Payment entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Location?> GetByIdAsync(Guid id)
+        public Task<Payment?> GetByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }

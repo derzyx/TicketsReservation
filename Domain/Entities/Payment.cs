@@ -25,6 +25,7 @@ namespace Domain.Entities
             Method = methode;
             ReservationId = reservationId;
             BuyerId = buyerId;
+            Status = PaymentStatutes.Pending;
         }
 
         public void CheckDeadline(Reservation reservation)

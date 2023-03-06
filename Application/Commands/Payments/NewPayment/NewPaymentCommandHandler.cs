@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.Commands.Payments.NewPayment
 {
-    public class NewPaymentCommandHandler : IRequestHandler<NewPaymentCommand, Payment>
+    public class NewPaymentCommandHandler : IRequestHandler<NewPaymentCommand, bool>
     {
         private readonly IPaymentRepository paymentRepository;
 
@@ -23,7 +23,6 @@ namespace Application.Commands.Payments.NewPayment
         public async Task<bool> Handle(NewPaymentCommand request, CancellationToken cancellationToken)
         {
             if (request.Reservation == null) throw new ReservationNotFoundException();
-            if (request.Buyer == null) throw new UserNotFoundException();
 
             if(request.Reservation.Status == ReservationStatutes.PaymentPending)
             {
@@ -31,10 +30,9 @@ namespace Application.Commands.Payments.NewPayment
                 {
                     request.Reservation.Status = ReservationStatutes.Canceled;
                     request.Reservation.Archive();
+                    return false;
                     // Can't pay anymore
                 }
-
-                // Wait for payment stataus
 
                 decimal amount = 0;
                 foreach (var ticket in request.Reservation.Products)
@@ -42,7 +40,9 @@ namespace Application.Commands.Payments.NewPayment
                     amount += ticket.Price;
                 }
 
-                var payment = await paymentRepository.AddAsync(new Payment(amount, request.Methode, request.Reservation.Id, request.Buyer.Id));
+                var payment = await paymentRepository.AddAsync(new Payment(amount, request.Methode, request.ReservationId, request.BuyerId));
+
+                // Send request to payment system
 
                 return true;
             }

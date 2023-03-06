@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿using Abstractions.DTOs;
+using Application.Queries.GetReservation;
+using Domain.Entities;
 using Domain.Enums;
 using MediatR;
 using System;
@@ -9,5 +11,5 @@ using System.Threading.Tasks;
 
 namespace Application.Commands.Payments.NewPayment
 {
-    public record NewPaymentCommand(PaymentMethodes Methode, Reservation Reservation, User Buyer) : IRequest<bool>;
+    public record NewPaymentCommand(PaymentMethodes Methode, Guid ReservationId, Reservation Reservation, Guid BuyerId) : IRequest<bool>;
 }

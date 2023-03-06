@@ -18,7 +18,7 @@ namespace Domain.Entities
         {
             Id = Guid.NewGuid();
             Products = products;
-            Status = status;
+            Status = ReservationStatutes.PaymentPending;
             PaymentDeadline = paymentDeadline;
         }
 

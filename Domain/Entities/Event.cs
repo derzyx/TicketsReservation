@@ -15,7 +15,6 @@ namespace Domain.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public Location Location { get; set; }
-        public Guid LocationId { get; set; }
         public int AllTickets { get; set; }
         public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
 
@@ -28,7 +27,6 @@ namespace Domain.Entities
             StartDate = startDate;
             EndDate = endDate;
             Location = location;
-            LocationId = location.Id;
             AllTickets = allTickets;
         }
 
@@ -36,14 +34,14 @@ namespace Domain.Entities
         {
             Name = (name == null) ? this.Name : name;
             Description = (description == null) ? this.Description : description;
-            
+
             var start = (startDate == null) ? this.StartDate : (DateTime)startDate;
             var end = (endDate == null) ? this.EndDate : (DateTime)endDate;
             ValidateDate(start, end);
             StartDate = start;
             EndDate = end;
-            Location = (location == null) ? this.Location : location;
-            LocationId = (location == null) ? this.Location.Id : location.Id;
+
+            Location = (location == null) ? this.Location : (Location)location;
             AllTickets = (allTickets == null) ? this.AllTickets : (int)allTickets;
         }
 

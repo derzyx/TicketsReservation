@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Location : BaseEntity
+    public struct Location
     {
         public string Country { get; set; }
         public string City { get; set; }
@@ -17,7 +17,6 @@ namespace Domain.Entities
 
         public Location(string country, string city, string street, string objectType, int objectCapacity)
         {
-            Id = Guid.NewGuid();
             Country = country;
             City = city;
             Street = street;

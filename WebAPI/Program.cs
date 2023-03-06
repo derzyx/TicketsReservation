@@ -23,8 +23,9 @@ builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
-builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
 ﻿using Application.Commands.Events.AddEvent;
+using Application.Queries.GetEvents;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,13 @@ namespace WebAPI.Controllers
         public EventController(IMediator _mediator)
         {
             mediator = _mediator;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Get([FromQuery] GetEventsQuery query)
+        {
+            var response = await mediator.Send(query);
+            return Ok(response);
         }
 
         [HttpPost]
